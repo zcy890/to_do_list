@@ -30,9 +30,6 @@ async function createTable() {
     });
   } catch (err) {
     console.error("Error creating table:", err);
-  } finally {
-    await db.end();
-  }
 }
 
 createTable();
