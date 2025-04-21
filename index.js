@@ -12,7 +12,25 @@ const db = new pg.Client({
   },
 });
 
-db.connect();
+async function createTable() {
+  try {
+    await db.connect();
+    const createTableQuery = `
+      CREATE TABLE IF NOT EXISTS items (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) NOT NULL
+      );
+    `;
+    await db.query(createTableQuery);
+    console.log('Table "items" created successfully.');
+  } catch (err) {
+    console.error("Error creating table:", err);
+  } finally {
+    await db.end();
+  }
+}
+
+createTable();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
