@@ -30,6 +30,7 @@ async function createTable() {
     });
   } catch (err) {
     console.error("Error creating table:", err);
+  }
 }
 
 createTable();
